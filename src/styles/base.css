@@ -1,0 +1,15 @@
+@layer reset, base;
+
+@layer reset {
+  * { box-sizing: border-box; }
+  html, body, #root { height: 100%; }
+  body { margin: 0; }
+}
+@layer base {
+  body { font-family: var(--fonte-base); background: var(--cor-fundo); color: var(--cor-texto); }
+  .container { width: min(1120px, 100% - 2*var(--esp-6)); margin-inline: auto; padding-inline: var(--esp-6); }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 3px solid var(--cor-primaria); outline-offset: 2px; }
+}

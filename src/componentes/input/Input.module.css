@@ -1,0 +1,4 @@
+.grupo { display: grid; gap: 6px; } .rotulo { font-size: var(--fs-14); color: var(--cor-texto-suave); }
+.campo { border: 1px solid var(--borda); border-radius: var(--raio-sm); padding: 10px 12px; font-size: var(--fs-16); background: #fff; }
+.campo:focus-visible { outline: 3px solid color-mix(in srgb, var(--cor-primaria), transparent 65%); }
+.erro { border-color: #ef4444; } .mensagem { color: var(--cor-texto-suave); font-size: var(--fs-12); } .mensagemErro { color: #ef4444; }

@@ -1,0 +1,3 @@
+import estilos from './Galeria.module.css'
+import { useRef } from 'react'
+export default function Galeria({ imagens }:{imagens:string[]}){ const trilho=useRef<HTMLDivElement|null>(null); function rolar(dx:number){ const n=trilho.current; if(n) n.scrollBy({left:dx,behavior:'smooth'}) } return (<div className={estilos.galeria}><button className={estilos.ctrl} onClick={()=>rolar(-320)} aria-label='Anterior'>‹</button><div ref={trilho} className={estilos.trilho}>{imagens.map((src,i)=>(<img key={i} src={src} loading='lazy' alt={`Imagem ${i+1}`} className={estilos.img}/>))}</div><button className={estilos.ctrl} onClick={()=>rolar(320)} aria-label='Próxima'>›</button></div>) }

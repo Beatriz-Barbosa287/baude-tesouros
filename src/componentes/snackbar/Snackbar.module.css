@@ -1,0 +1,1 @@
+.snackbar{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#111827;color:#fff;border-radius:999px;padding:10px 16px;opacity:0;transition:opacity .2s ease,transform .2s ease}.ativo{opacity:1;transform:translateX(-50%) translateY(0)}.inativo{opacity:0;transform:translateX(-50%) translateY(6px)}
