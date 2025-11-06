@@ -17,7 +17,7 @@ export default function ListaItens() {
     loc.pathname.startsWith('/troca') ? 'troca' : ''
 
   const [busca, setBusca] = useState('')
-  const [categoria, setCategoria] = useState('')
+  const [categoria, setCategoria] = useState<'Brinquedos' | 'Roupas' | 'Livros' | 'Acessórios' | ''>('')
   const [ordenar, setOrdenar] = useState<'recentes'|'preco-asc'|'preco-desc' | ''>('recentes')
   const [pagina, setPagina] = useState(1)
   const [itens, setItens] = useState<any[]>([])
@@ -43,7 +43,7 @@ export default function ListaItens() {
       <Card titulo='Catálogo'>
         <div style={{ display: 'grid', gap: 12, gridTemplateColumns: '2fr 1fr 1fr auto' }}>
           <Input placeholder='Buscar itens' value={busca} onChange={e=>setBusca(e.target.value)} />
-          <Select value={categoria} onChange={e=>setCategoria(e.target.value)}>
+          <Select value={categoria} onChange={e=>setCategoria(e.target.value as typeof categoria)}>
             <option value=''>Todas as categorias</option>
             <option>Brinquedos</option>
             <option>Roupas</option>

@@ -8,8 +8,8 @@ import { criar, obter, atualizar } from '../../infraestrutura/api/itens'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUI } from '../../aplicacao/provedores'
 
-const CATEGORIAS = ['Brinquedos','Roupas','Livros','Acessórios']
-const CONDICOES = ['Novo','Pouco uso','Usado']
+const CATEGORIAS = ['Brinquedos','Roupas','Livros','Acessórios'] as const
+const CONDICOES = ['Novo','Pouco uso','Usado'] as const
 
 export default function FormularioItem() {
   const nav = useNavigate()
@@ -18,8 +18,8 @@ export default function FormularioItem() {
 
   const [titulo, setTitulo] = useState('')
   const [descricao, setDescricao] = useState('')
-  const [categoria, setCategoria] = useState(CATEGORIAS[0])
-  const [condicao, setCondicao] = useState(CONDICOES[0])
+  const [categoria, setCategoria] = useState<'Brinquedos'|'Roupas'|'Livros'|'Acessórios'>(CATEGORIAS[0])
+  const [condicao, setCondicao] = useState<'Novo'|'Pouco uso'|'Usado'>(CONDICOES[0])
   const [tipoTransacao, setTipoTransacao] = useState<'venda'|'doacao'|'troca'>('venda')
   const [preco, setPreco] = useState<number | ''>('')
   const [aceitaTroca, setAceitaTroca] = useState(true)
@@ -55,8 +55,8 @@ export default function FormularioItem() {
         <Input rotulo='Título' value={titulo} onChange={e=>setTitulo(e.target.value)} required />
         <Input rotulo='Descrição' value={descricao} onChange={e=>setDescricao(e.target.value)} required />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
-          <Select rotulo='Categoria' value={categoria} onChange={e=>setCategoria(e.target.value)}>{CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}</Select>
-          <Select rotulo='Condição' value={condicao} onChange={e=>setCondicao(e.target.value)}>{CONDICOES.map(c => <option key={c} value={c}>{c}</option>)}</Select>
+          <Select rotulo='Categoria' value={categoria} onChange={e=>setCategoria(e.target.value as typeof categoria)}>{CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}</Select>
+          <Select rotulo='Condição' value={condicao} onChange={e=>setCondicao(e.target.value as typeof condicao)}>{CONDICOES.map(c => <option key={c} value={c}>{c}</option>)}</Select>
           <Select rotulo='Transação' value={tipoTransacao} onChange={e=>setTipoTransacao(e.target.value as any)}>
             <option value='venda'>Venda</option><option value='doacao'>Doação</option><option value='troca'>Troca</option>
           </Select>

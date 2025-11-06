@@ -1,9 +1,9 @@
-import Card from '@componentes/card/Card'
-import Botao from '@componentes/botao/Botao'
-import { listarPropostas, responderProposta } from '@infraestrutura/api/negocios'
+import Card from '../../componentes/card/Card'
+import Botao from '../../componentes/botao/Botao'
+import { listarPropostas, responderProposta } from '../../infraestrutura/api/negocio'
 import { useEffect, useState } from 'react'
-import Badge from '@componentes/badge/Badge'
-import { useUI } from '@aplicacao/provedores'
+import Badge from '../../componentes/badge/Badge'
+import { useUI } from '../../aplicacao/provedores'
 
 export default function Troca() {
   const [propostas, setPropostas] = useState<any[]>([])

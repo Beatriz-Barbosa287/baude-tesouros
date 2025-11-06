@@ -1,5 +1,5 @@
 import Card from '@componentes/card/Card'
-import { listarTransacoes } from '@infraestrutura/api/negocios'
+import { listarTransacoes } from '../../infraestrutura/api/negocio'
 import { useEffect, useState } from 'react'
 export default function Perfil() {
   const [tx, setTx] = useState<any[]>([])

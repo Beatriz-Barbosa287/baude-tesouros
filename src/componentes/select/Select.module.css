@@ -1,1 +1,8 @@
-.grupo{display:grid;gap:6px}.rotulo{font-size:var(--fs-14);color:var(--cor-texto-suave)}.campo{border:1px solid var(--borda);border-radius:var(--raio-sm);padding:10px 12px;font-size:var(--fs-16);background:#fff}.campo:focus-visible{outline:3px solid color-mix(in srgb,var(--cor-primaria),transparent 65%)}
+.grupo{display:grid;gap:6px}
+.rotulo{font-size:var(--fs-14);
+    color:var(--cor-texto-suave)}
+.campo{border:1px solid var(--borda);
+    border-radius:var(--raio-sm);
+    padding:10px 12px;font-size:var(--fs-16);
+    background:#fff}
+.campo:focus-visible{outline:3px solid color-mix(in srgb,var(--cor-primaria),transparent 65%)}
