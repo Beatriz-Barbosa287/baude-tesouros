@@ -1,6 +1,6 @@
-import estilos from './BarraNavegacao.module.css'
+import estilos from '../../ui/barra-navegacao/BarraNavegacao.module.css'
 import { Link } from 'react-router-dom'
-import { useAuth } from '@aplicacao/provedores'
+import { useAuth } from '../../../aplicacao/provedores'
 
 export default function BarraNavegacao() {
   const { usuario, sair } = useAuth()

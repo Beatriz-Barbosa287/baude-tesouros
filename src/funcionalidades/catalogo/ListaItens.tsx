@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import Card from '@componentes/card/Card'
-import Input from '@componentes/input/Input'
-import Select from '@componentes/select/Select'
-import Botao from '@componentes/botao/Botao'
-import Paginacao from '@componentes/paginacao/Paginacao'
-import { listar } from '@infraestrutura/api/itens'
+import Card from '../../componentes/card/Card'
+import Input from '../../componentes/input/Input'
+import Select from '../../componentes/select/Select'
+import Botao from '../../componentes/botao/Botao'
+import Paginacao from '../../componentes/paginacao/Paginacao'
+import { listar } from '../../infraestrutura/api/itens'
 import { Link, useLocation } from 'react-router-dom'
 
 const POR_PAG = 12

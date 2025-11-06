@@ -1,12 +1,12 @@
-import Input from '@componentes/input/Input'
-import Select from '@componentes/select/Select'
-import Checkbox from '@componentes/checkbox/Checkbox'
-import Botao from '@componentes/botao/Botao'
-import Card from '@componentes/card/Card'
+import Input from '../../componentes/input/Input'
+import Select from '../../componentes/select/Select'
+import Checkbox from '../../componentes/checkbox/Checkbox'
+import Botao from '../../componentes/botao/Botao'
+import Card from '../../componentes/card/Card'
 import { useState, useEffect } from 'react'
-import { criar, obter, atualizar } from '@infraestrutura/api/itens'
+import { criar, obter, atualizar } from '../../infraestrutura/api/itens'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useUI } from '@aplicacao/provedores'
+import { useUI } from '../../aplicacao/provedores'
 
 const CATEGORIAS = ['Brinquedos','Roupas','Livros','Acessórios']
 const CONDICOES = ['Novo','Pouco uso','Usado']
