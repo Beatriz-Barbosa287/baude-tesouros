@@ -1,29 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg' // mantém em src/assets/
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Topbar from './componentes/Topbar';
+import Sidebar from './componentes/Sidebar';
+import Home from './pages/Home';
+import Venda from './pages/Venda';
+import Doacao from './pages/Doacao';
+import Troca from './pages/Troca';
+import Perfil from './pages/Perfil';
+import Contato from './pages/Contato';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App(){
   return (
-    <div>
-      <a href="https://vite.dev" target="_blank">
-        <img src="/vite.svg" className="logo" alt="Vite logo" /> {/* vem de public */}
-      </a>
-      <a href="https://react.dev" target="_blank">
-        <img src={reactLogo} className="logo react" alt="React logo" /> {/* vem de src/assets */}
-      </a>
-
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((c) => c + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+    <BrowserRouter>
+      <div className="bt-shell">
+        <Topbar />
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/venda" element={<Venda />} />
+          <Route path="/doacao" element={<Doacao />} />
+          <Route path="/troca" element={<Troca />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/contato" element={<Contato />} />
+        </Routes>
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+//npm i react-router-dom
+//npm i -D @types/react-router-dom
