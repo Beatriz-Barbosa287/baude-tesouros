@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, PropsWithChildren } from 'react'
-import Snackbar from '@componentes/snackbar/Snackbar'
+import Snackbar from '../componentes/snackbar/Snackbar'
 
 type UIState = { mensagem?: string; notificar: (m: string) => void }
 const UIContext = createContext<UIState | null>(null)
@@ -17,12 +17,12 @@ export default function Provedores({ children }: PropsWithChildren){
 
   const [usuario, setUsuario] = useState<Usuario|null>(null)
   async function entrar(email:string, senha:string){
-    const { autenticar } = await import('@infraestrutura/api/auth'); const u = await autenticar(email, senha); setUsuario(u)
+    const { autenticar } = await import('../infraestrutura/api/auth'); const u = await autenticar(email, senha); setUsuario(u)
   }
   async function cadastrar(nome:string, email:string, senha:string){
-    const { registrar } = await import('@infraestrutura/api/auth'); const u = await registrar(nome, email, senha); setUsuario(u)
+    const { registrar } = await import('../infraestrutura/api/auth'); const u = await registrar(nome, email, senha); setUsuario(u)
   }
-  function sair(){ const { sair:sairApi } = require('@infraestrutura/api/auth'); sairApi(); setUsuario(null) }
+  function sair(){ const { sair:sairApi } = require('../infraestrutura/api/auth'); sairApi(); setUsuario(null) }
   const auth = useMemo<AuthState>(()=>({ usuario, entrar, cadastrar, sair }),[usuario])
 
   

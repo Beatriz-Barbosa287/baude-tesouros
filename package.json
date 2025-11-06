@@ -12,18 +12,34 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^6.30.1"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.0.0",
+    "@types/react-dom": "^19.2.2",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.12.0",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "install": "^0.13.0",
+    "npm": "^11.6.2",
     "prettier": "^3.3.3",
+    "react-router-dom": "^7.9.5",
     "typescript": "^5.6.3",
     "vite": "^5.4.8"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beatriz-Barbosa287/baude-tesouros.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beatriz-Barbosa287/baude-tesouros/issues"
+  },
+  "homepage": "https://github.com/Beatriz-Barbosa287/baude-tesouros#readme"
 }

@@ -1,7 +1,7 @@
 import Card from '@componentes/card/Card'
 import Botao from '@componentes/botao/Botao'
 import Badge from '@componentes/badge/Badge'
-import { listar, atualizar } from '@infraestrutura/api/denuncias'
+import { listar, atualizar } from '../infraestrutura/armazenamento/local';
 import { useEffect, useState } from 'react'
 import { useUI } from '@aplicacao/provedores'
 
