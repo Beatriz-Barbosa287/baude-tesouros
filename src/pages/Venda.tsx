@@ -3,13 +3,14 @@ import logo from '../assets/banner.png';
 import ProductGrid, { Produto } from '../componentes/ProductGrid';
 import Button from '../componentes/ui/Button';
 import '../styles/home.css';
+import { Link } from 'react-router-dom';
 
 export default function Venda() {
   // fonte dos dados: somente itens do tipo 'venda'
   const data: Produto[] = [
-    { id:'1', name:'Motoca Infantil', kind:'venda' },
-    { id:'2', name:'Coleção HP',      kind:'venda' },
-    { id:'3', name:'Boneco Disney',   kind:'venda' },
+    { id: '1', name: 'Motoca Infantil', kind: 'venda' },
+    { id: '2', name: 'Coleção HP', kind: 'venda' },
+    { id: '3', name: 'Boneco Disney', kind: 'venda' },
 
   ];
 
@@ -28,7 +29,7 @@ export default function Venda() {
       <main className="bt-content">
         <section className="bt-banner">
           <div className="illus">
-            <img src={logo} alt="Baú de Tesouros" style={{ width:'100%', maxWidth:'1000px' }} />
+            <img src={logo} alt="Baú de Tesouros" style={{ width: '100%', maxWidth: '1000px' }} />
           </div>
         </section>
 
@@ -38,14 +39,16 @@ export default function Venda() {
           <ProductGrid items={pageItems} />
 
           {/* Paginação */}
-          <div style={{ display:'flex', justifyContent:'center', gap:8, marginTop:14 }}>
-            <Button variant="neutral" size="sm" onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}>◀</Button>
-            <div style={{ alignSelf:'center', fontWeight:800 }}>{page} / {totalPages}</div>
-            <Button variant="neutral" size="sm" onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages}>▶</Button>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 14 }}>
+            <Button variant="neutral" size="sm" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>◀</Button>
+            <div style={{ alignSelf: 'center', fontWeight: 800 }}>{page} / {totalPages}</div>
+            <Button variant="neutral" size="sm" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>▶</Button>
           </div>
 
-          <div style={{ textAlign:'center', marginTop:18 }}>
-            <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA VENDA</Button>
+          <div style={{ textAlign: 'center', marginTop: 18 }}>
+            <Link to="/venda/novo" style={{ textDecoration: 'none' }}>
+              <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA VENDA</Button>
+            </Link>
           </div>
         </section>
       </main>

@@ -8,6 +8,9 @@ import Doacao from './pages/Doacao';
 import Troca from './pages/Troca';
 import Perfil from './pages/Perfil';
 import Contato from './pages/Contato';
+import VendaNovo from './pages/VendaNovo';
+import TrocaNovo from './pages/TrocaNovo';
+import DoacaoNovo from './pages/DoacaoNovo';
 
 export default function App(){
   return (
@@ -22,6 +25,9 @@ export default function App(){
           <Route path="/troca" element={<Troca />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/contato" element={<Contato />} />
+          <Route path="/venda/novo" element={<VendaNovo />} />
+          <Route path="/troca/novo" element={<TrocaNovo />} />
+          <Route path="/doacao/novo" element={<DoacaoNovo />} />
         </Routes>
       </div>
     </BrowserRouter>
