@@ -1,24 +1,26 @@
 import React from 'react';
+import Badge from './ui/Badge';
+import Button from './ui/Button';
 
-type Kind = 'venda'|'troca'|'doacao';
+export type Kind = 'venda' | 'troca' | 'doacao';
+
 export type ItemCardProps = {
   name: string;
   image?: string;
   kind: Kind;
+  onClick?: () => void;
 };
 
-const label = { venda:'VENDA', troca:'TROCA', doacao:'DOAÇÃO' };
-
-export default function ItemCard({ name, image, kind }: ItemCardProps){
+export default function ItemCard({ name, image, kind, onClick }: ItemCardProps){
   return (
     <div className="bt-card">
       <div className="thumb">
         {image ? <img src={image} alt={name} /> : <span>📦</span>}
       </div>
       <div className="body">
-        <span className={`bt-chip ${kind}`}>{label[kind]}</span>
+        <Badge kind={kind} />
         <div className="name">{name}</div>
-        <button className="btn">Saiba Mais</button>
+        <Button variant="neutral" size="sm" onClick={onClick}>Saiba Mais</Button>
       </div>
     </div>
   );

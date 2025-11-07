@@ -1,56 +1,51 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import logo from '../assets/banner.png';
-import ItemCard from '../componentes/ItemCard';
+import ProductGrid, { Produto } from '../componentes/ProductGrid';
+import Button from '../componentes/ui/Button';
 import '../styles/home.css';
 
 export default function Venda() {
-  const produtos = [
-    { name: 'Motoca Infantil', kind: 'venda' as const },
-    { name: 'Coleção HP', kind: 'venda' as const },
-    { name: 'Boneco Disney', kind: 'venda' as const },
-    { name: 'Jogo Educativo', kind: 'venda' as const },
-    { name: 'Kit Blocos', kind: 'venda' as const },
-    { name: 'Carrinho Azul', kind: 'venda' as const },
-    { name: 'Pelúcia Urso', kind: 'venda' as const },
-    { name: 'Quebra-Cabeça', kind: 'venda' as const },
-    { name: 'Caminhão', kind: 'venda' as const },
-    { name: 'Livro Infantil', kind: 'venda' as const },
+  // fonte dos dados: somente itens do tipo 'venda'
+  const data: Produto[] = [
+    { id:'1', name:'Motoca Infantil', kind:'venda' },
+    { id:'2', name:'Coleção HP',      kind:'venda' },
+    { id:'3', name:'Boneco Disney',   kind:'venda' },
+
   ];
+
+  // paginação simples
+  const [page, setPage] = useState(1);
+  const perPage = 10;
+  const totalPages = Math.max(1, Math.ceil(data.length / perPage));
+
+  const pageItems = useMemo(() => {
+    const start = (page - 1) * perPage;
+    return data.slice(start, start + perPage);
+  }, [data, page]);
 
   return (
     <div className="bt-shell">
       <main className="bt-content">
-        {/* Banner igual ao da Home, com sua imagem */}
         <section className="bt-banner">
           <div className="illus">
-            <img src={logo} alt="Baú de Tesouros" style={{ width: '100%', maxWidth: '1000px' }} />
+            <img src={logo} alt="Baú de Tesouros" style={{ width:'100%', maxWidth:'1000px' }} />
           </div>
         </section>
 
         <section className="bt-list" style={{ marginTop: 18 }}>
-          <h3>Itens Disponíveis para Venda</h3>
-          <div className="bt-grid">
-            {produtos.map((p, i) => (
-              <ItemCard key={i} name={p.name} kind={p.kind} />
-            ))}
+          <h3>Produtos Classificados para Venda</h3>
+
+          <ProductGrid items={pageItems} />
+
+          {/* Paginação */}
+          <div style={{ display:'flex', justifyContent:'center', gap:8, marginTop:14 }}>
+            <Button variant="neutral" size="sm" onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}>◀</Button>
+            <div style={{ alignSelf:'center', fontWeight:800 }}>{page} / {totalPages}</div>
+            <Button variant="neutral" size="sm" onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages}>▶</Button>
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: 18 }}>
-            <button
-              style={{
-                background: '#FF4D4F',
-                color: '#fff',
-                fontWeight: 800,
-                border: 'none',
-                padding: '12px 28px',
-                borderRadius: 10,
-                fontSize: 15,
-                cursor: 'pointer',
-                boxShadow: '0 3px 0 #b92c2e',
-              }}
-            >
-              ➕ CADASTRAR NOVO ITEM PARA VENDA
-            </button>
+          <div style={{ textAlign:'center', marginTop:18 }}>
+            <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA VENDA</Button>
           </div>
         </section>
       </main>
