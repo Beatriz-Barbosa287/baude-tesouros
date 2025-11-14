@@ -1,3 +1,4 @@
+import React from 'react'
 import BarraNavegacao from '../ui/barra-navegacao/BarraNavegacao'
 import Rodape from '../ui/rodape/Rodape'
 import { PropsWithChildren } from 'react'

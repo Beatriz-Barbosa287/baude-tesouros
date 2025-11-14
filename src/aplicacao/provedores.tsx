@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, PropsWithChildren } from 'react'
-import Snackbar from '../componentes/snackbar/Snackbar'
+
 
 /** ===== UI (snackbar global) ===== */
 type UIState = { mensagem?: string; notificar: (m: string) => void }
@@ -68,12 +68,5 @@ export default function Provedores({ children }: PropsWithChildren) {
     sair,
   }), [usuario])
 
-  return (
-    <UIContext.Provider value={ui}>
-      <AuthContext.Provider value={auth}>
-        {children}
-        <Snackbar mensagem={mensagem} />
-      </AuthContext.Provider>
-    </UIContext.Provider>
-  )
+ 
 }

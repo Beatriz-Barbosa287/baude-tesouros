@@ -38,8 +38,8 @@ export default function Troca() {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: 18 }}>
-            <Link to="/venda/novo" style={{ textDecoration: 'none' }}>
-              <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA VENDA</Button>
+            <Link to="/troca/novo" style={{ textDecoration: 'none' }}>
+              <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA TROCA</Button>
             </Link>
           </div>
         </section>

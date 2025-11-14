@@ -38,8 +38,8 @@ export default function Doacao() {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: 18 }}>
-            <Link to="/venda/novo" style={{ textDecoration: 'none' }}>
-              <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA VENDA</Button>
+            <Link to="/doacao/novo" style={{ textDecoration: 'none' }}>
+              <Button variant="danger">➕ CADASTRAR NOVO ITEM PARA DOAÇÃO</Button>
             </Link>
           </div>
         </section>

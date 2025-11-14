@@ -1,3 +1,4 @@
+import React from 'react'
 import estilos from '../rodape/Rodape.module.css'
 
 export default function Rodape() {

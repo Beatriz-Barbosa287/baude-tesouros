@@ -1,50 +1,89 @@
 import { Router } from 'express';
-import Item from '../models/Item.js';
-import { upload } from '../utilitarios/upload.js';
+import { db, bucket } from '../config/firebase.js';
 import { requireAuth } from '../middlewares/auth.js';
+import { uploadMemory } from '../utilitarios/upload.js';
+import { v4 as uuid } from 'uuid';
+//npm install uuid
+//npm install --save-dev @types/uuid
 
 const router = Router();
 
-/** Listar itens por tipo com paginação: /items/venda?pag=1&limit=10 */
+// GET /items/:tipo?venda|troca|doacao
 router.get('/:tipo', async (req, res) => {
-  const { tipo } = req.params;                      // 'venda' | 'troca' | 'doacao'
-  const pag = Math.max(1, Number(req.query.pag) || 1);
-  const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 10));
-  const skip = (pag - 1) * limit;
-
-  const [items, total] = await Promise.all([
-    Item.find({ tipo }).sort({ createdAt: -1 }).skip(skip).limit(limit),
-    Item.countDocuments({ tipo })
-  ]);
-
-  res.json({ items, pag, total, totalPaginas: Math.ceil(total / limit) });
-});
-
-/** Criar item (autenticado) com imagens multipart */
-router.post('/', requireAuth, upload.array('imagens', 8), async (req, res) => {
   try {
-    const { titulo, descricao, tipo, preco, condicao, faixaEtaria, local } = req.body;
-    const usuarioId = (req as any).user.id;
+    const { tipo } = req.params;
+    const limit = Math.min(50, Number(req.query.limit) || 10);
+    const after = req.query.after as string | undefined;
 
-    const imagens = (req.files as Express.Multer.File[] | undefined)?.map(f => `/uploads/${f.filename}`) ?? [];
+    let query = db.collection('itens')
+      .where('tipo', '==', tipo)
+      .orderBy('createdAt', 'desc')
+      .limit(limit);
 
-    const item = await Item.create({
-      titulo,
-      descricao,
-      tipo,
-      preco: tipo === 'venda' && preco ? Number(preco) : null,
-      condicao,
-      faixaEtaria,
-      local,
-      imagens,
-      usuarioId
-    });
+    if (after) {
+      const afterDoc = await db.collection('itens').doc(after).get();
+      if (afterDoc.exists) {
+        query = query.startAfter(afterDoc);
+      }
+    }
 
-    res.json(item);
-  } catch (e) {
-    res.status(400).json({ error: 'Erro ao cadastrar item' });
+    const snap = await query.get();
+    const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const nextPageToken = snap.docs.length ? snap.docs[snap.docs.length - 1].id : null;
+
+    res.json({ items, nextPageToken });
+  } catch (err) {
+    console.error('Erro ao listar itens:', err);
+    res.status(500).json({ error: 'Erro ao listar itens' });
   }
 });
 
-/** (Opcional) Remover/Atualizar item — adicionar quando precisar */
+// POST /items  (criar item) - autenticado
+router.post(
+  '/',
+  requireAuth,
+  uploadMemory.array('imagens', 8),
+  async (req, res) => {
+    try {
+      const { titulo, descricao, tipo, preco, condicao, faixaEtaria, local } = req.body;
+      const user = (req as any).user;
+
+      const uploadedUrls: string[] = [];
+      const files = (req.files as Express.Multer.File[] | undefined) ?? [];
+
+      for (const file of files) {
+        const filename = `${uuid()}-${file.originalname}`;
+        const blob = bucket.file(filename);
+        await blob.save(file.buffer, {
+          contentType: file.mimetype,
+          public: true,
+          metadata: { cacheControl: 'public, max-age=31536000' },
+        });
+        uploadedUrls.push(`https://storage.googleapis.com/${bucket.name}/${filename}`);
+      }
+
+      const data = {
+        titulo,
+        descricao: descricao ?? '',
+        tipo,
+        preco: tipo === 'venda' && preco ? Number(preco) : null,
+        condicao,
+        faixaEtaria: faixaEtaria ?? '',
+        local,
+        imagens: uploadedUrls,
+        usuarioId: user.uid,
+        createdAt: new Date(),
+      };
+
+      const docRef = await db.collection('itens').add(data);
+      const saved = await docRef.get();
+
+      res.json({ id: docRef.id, ...saved.data() });
+    } catch (err) {
+      console.error('Erro ao criar item:', err);
+      res.status(400).json({ error: 'Erro ao criar item' });
+    }
+  }
+);
+
 export default router;

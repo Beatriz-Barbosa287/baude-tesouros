@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { auth } from '../config/firebase.js';
 
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
+export async function requireAuth(req: Request, res: Response, next: NextFunction) {
   try {
     const header = req.headers.authorization;
-    if (!header?.startsWith('Bearer ')) return res.status(401).json({ error: 'Token ausente' });
+    if (!header || !header.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token ausente' });
+    }
     const token = header.split(' ')[1];
-    const payload = jwt.verify(token, process.env.JWT_SECRET!);
-    (req as any).user = payload;
+    const decoded = await auth.verifyIdToken(token);
+    (req as any).user = decoded;
     next();
-  } catch {
+  } catch (err) {
+    console.error('Erro ao validar token Firebase:', err);
     return res.status(401).json({ error: 'Token inválido' });
   }
 }
-//npm install jsonwebtoken @types/jsonwebtoken

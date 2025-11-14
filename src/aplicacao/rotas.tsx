@@ -1,16 +1,20 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import PaginaInicial from '../funcionalidades/catalogo/PaginaInicial'
-import Login from '../funcionalidades/autenticacao/Login'
-import Cadastro from '../funcionalidades/autenticacao/Cadastro'
-import Perfil from '../funcionalidades/perfil/Perfil'
-import DetalheItem from '../funcionalidades/catalogo/DetalheItem'
-import ListaItens from '../funcionalidades/catalogo/ListaItens'
-import FormularioItem from '../funcionalidades/item/FormularioItem'
-import Troca from '../funcionalidades/troca/Troca'
-import Administracao from '../funcionalidades/administracao/Administracao'
-import Interesse from '../funcionalidades/interesse/Interesse'
 import LayoutPadrao from './ui/LayoutPadrao'
 import RotaProtegida from './RotaProtegida'
+import React from 'react'
+import ItemForm from '../componentes/forms/ItemFormVenda'
+import PaginaInicial from '../pages/Home'
+import Login from '../pages/Login'
+import Cadastro from '../pages/Cadastro'
+import FormularioItemVenda from '../pages/VendaNovo'
+import FormularioItemDoacao from '../pages/DoacaoNovo'
+import FormularioItemTroca from '../pages/TrocaNovo'
+import DetalheItem from '../pages/DetalheItem'
+import Paginavenda from '../pages/Venda'
+import Paginadoacao from '../pages/Doacao'
+import Paginatroca from '../pages/Troca'
+import Perfil from '../pages/Perfil'
+
 //npm install react-router-dom && npm install -D @types/react @types/react-dom @types/react-router-dom
 export default function Rotas() {
   return (
@@ -20,42 +24,21 @@ export default function Rotas() {
         <Route path='/login' element={<Login />} />
         <Route path='/cadastro' element={<Cadastro />} />
 
-        <Route path='/venda' element={<ListaItens />} />
-        <Route path='/doacao' element={<ListaItens />} />
-        <Route path='/troca' element={
-          <RotaProtegida>
-            <Troca />
-          </RotaProtegida>
-        } />
-        <Route path='/venda/novo' element={
-          <RotaProtegida>
-            <FormularioItem />
-          </RotaProtegida>
-        } />
+        <Route path='/venda' element={< Paginavenda />} />
+        <Route path='/doacao' element={< Paginadoacao />} />
+        <Route path='/troca' element={<Paginatroca />} />
+        <Route path='/venda/novo' element={<FormularioItemVenda />} />
+        <Route path='/troca/novo' element={<FormularioItemTroca />} />
+        <Route path='/doacao/novo' element={<FormularioItemDoacao />} />
         <Route path='/item/:id' element={<DetalheItem />} />
-        <Route path='/item/:id/editar' element={
-          <RotaProtegida>
-            <FormularioItem />
-          </RotaProtegida>
-        } />
-
-        <Route path='/interesse/:id' element={
-          <RotaProtegida>
-            <Interesse />
-          </RotaProtegida>
-        } />
-
+       
         <Route path='/perfil' element={
           <RotaProtegida>
             <Perfil />
           </RotaProtegida>
         } />
 
-        <Route path='/admin' element={
-          <RotaProtegida somenteAdmin>
-            <Administracao />
-          </RotaProtegida>
-        } />
+      
 
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>

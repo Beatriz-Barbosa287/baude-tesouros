@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { PropsWithChildren } from 'react'
 import { useAuth } from '../aplicacao/provedores'
+import React from 'react'
 
 type Props = PropsWithChildren & { somenteAdmin?: boolean }
 

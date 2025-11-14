@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/banner.png';
-import ItemForm, { ItemFormData } from '../componentes/forms/ItemForm';
+import ItemForm, { ItemFormData } from '../componentes/forms/ItemFormTroca';
 import '../styles/home.css';
 import '../styles/cadastroItem.css';
 
